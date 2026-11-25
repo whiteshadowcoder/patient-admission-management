@@ -1,0 +1,6 @@
+.env
+test.py
+*.pdf
+__pycache__/
+frontend/node_modules/
+frontend/dist/

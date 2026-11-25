@@ -135,7 +135,4 @@ Both images show the running app with sample patient records.
 ![Patient Admission Management mobile view](screenshots/mobile.png)
 
 The mobile view shows the form stacked into one column and the patient list
-rendered as cards. To regenerate these images, run the app, seed a few patients,
-and capture `http://localhost:5000/` at 1440px and 390px wide.
-
-- Live working link: pending deployment
+rendered as cards. 

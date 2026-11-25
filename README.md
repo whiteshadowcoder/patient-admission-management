@@ -1,9 +1,4 @@
 # Patient Admission Management App
-
-Patient admission manager built strictly to the task document: a React frontend
-and a Python backend. The backend uses only the Python standard library for
-HTTP, plus the MySQL driver. No Flask, no Node backend.
-
 ## Features
 
 - Add a patient
@@ -149,10 +144,4 @@ The mobile view shows the form stacked into one column and the patient list
 rendered as cards. To regenerate these images, run the app, seed a few patients,
 and capture `http://localhost:5000/` at 1440px and 390px wide.
 
-## Submission
-
-- Repository: <https://github.com/whiteshadowcoder/patient-admission-management>
-  (private for now; it will be made public when required)
 - Live working link: pending deployment
-- Contact: [pramod@dscribe.in](mailto:pramod@dscribe.in),
-  [suhasm@dscribe.in](mailto:suhasm@dscribe.in)

@@ -28,9 +28,6 @@ frontend/
   src/styles.css      Responsive styles
   index.html
   vite.config.js      Dev proxy for /api
-screenshots/
-  desktop.png         Full-page desktop view
-  mobile.png          Full-page mobile view
 ```
 
 ## Prerequisites
@@ -97,9 +94,6 @@ python project1.py
 
 Open <http://localhost:5000>.
 
-## Repository
-
-Private repository: <https://github.com/whiteshadowcoder/patient-admission-management>
 
 ## Validation
 

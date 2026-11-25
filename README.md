@@ -64,6 +64,13 @@ DB_NAME=project
 database name comes from `.env` too. Change them to your local MySQL account.
 Never commit `.env` or real passwords.
 
+For a hosted MySQL service that uses a non-default port or TLS, add these too:
+
+```
+DB_PORT=4000
+DB_SSL_CA=/etc/ssl/certs/ca-certificates.crt
+```
+
 ## Run
 
 Start the Python API:
@@ -103,7 +110,7 @@ Both React and Python enforce the same rules:
 - Age: required, whole number between 0 and 120
 - Gender, Ward, Department, Doctor: required, chosen from fixed lists
 - Admission Date: required, `YYYY-MM-DD`, not in the future
-- Status: Admitted or Discharged
+- Status: required, chosen from the fixed status list
 
 The Python API rejects invalid data with HTTP 400 and a clear per-field error.
 
@@ -118,9 +125,26 @@ The Python API rejects invalid data with HTTP 400 and a clear per-field error.
 | PATCH | `/api/patients/<id>/discharge` | Mark as discharged |
 | DELETE | `/api/patients/<id>` | Delete a patient |
 
+## Deploy on Render
+
+Create one Web Service in Render. It builds React and serves it together with
+the Python API from the same service.
+
+- Repository: your private GitHub repo
+- Runtime: Python 3
+- Build command: `npm install --prefix frontend && npm run build --prefix frontend && pip install mysql-connector-python`
+- Start command: `python project1.py`
+- Health check path: `/api/options`
+- Environment variables: `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, and
+  optionally `DB_PORT`, `DB_SSL_CA`
+
+Render sets `PORT` automatically and the app binds to it. Render does not
+provide MySQL, so use an external MySQL-compatible service such as TiDB Cloud
+Starter or Aiven. The `patients` table is created on first start.
+
 ## Live link
 
-Not deployed yet. The working URL will be added here after deployment.
+Will be added after Render deployment.
 
 ## Screenshots
 

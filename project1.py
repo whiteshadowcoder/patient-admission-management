@@ -69,17 +69,21 @@ load_env()
 def setting(name):
     value = os.getenv(name)
     if not value:
-        raise SystemExit(f"{name} is missing. Add it to the .env file.")
+        raise SystemExit(f"{name} is missing. Add it to .env or Render environment variables.")
     return value
 
 
 def connect():
-    return mysql.connector.connect(
-        host=setting("DB_HOST"),
-        user=setting("DB_USER"),
-        password=setting("DB_PASSWORD"),
-        database=setting("DB_NAME"),
-    )
+    params = {
+        "host": setting("DB_HOST"),
+        "user": setting("DB_USER"),
+        "password": setting("DB_PASSWORD"),
+        "database": setting("DB_NAME"),
+        "port": int(os.getenv("DB_PORT", 3306)),
+    }
+    if os.getenv("DB_SSL_CA"):
+        params["ssl_ca"] = os.environ["DB_SSL_CA"]
+    return mysql.connector.connect(**params)
 
 
 def query(sql, params=()):
@@ -115,7 +119,7 @@ def init_db():
             department VARCHAR(40) NOT NULL,
             doctor VARCHAR(40) NOT NULL,
             admission_date DATE NOT NULL,
-            status VARCHAR(10) NOT NULL DEFAULT 'Admitted'
+            status VARCHAR(20) NOT NULL DEFAULT 'Admitted'
         )"""
     )
 
@@ -273,4 +277,4 @@ class Handler(SimpleHTTPRequestHandler):
 
 if __name__ == "__main__":
     init_db()
-    ThreadingHTTPServer(("0.0.0.0", 5000), Handler).serve_forever()
+    ThreadingHTTPServer(("0.0.0.0", int(os.getenv("PORT", 5000))), Handler).serve_forever()

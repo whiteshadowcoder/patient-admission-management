@@ -144,7 +144,7 @@ Starter or Aiven. The `patients` table is created on first start.
 
 ## Live link
 
-Will be added after Render deployment.
+<https://patient-admission-management-1-dtlq.onrender.com/>
 
 ## Screenshots
 
